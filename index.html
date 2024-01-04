@@ -83,18 +83,26 @@
       let holdStart;
       let holdDuration = 1000; // Dauer des Gedrückt-Haltens in Millisekunden
 
+      const videos = [
+        'video1.mp4',
+        'video2.mp4',
+        'video3.mp4',
+        'video4.mp4'
+        // Füge hier weitere Videonamen hinzu
+      ];
+
+      // Zufälliges Video vorladen
+      const preloadVideos = videos.map(src => {
+        const video = document.createElement('video');
+        video.src = src;
+        video.preload = 'auto';
+        return video;
+      });
+
       // Funktion, um ein zufälliges Video abzuspielen
       function playRandomVideo() {
-        const videos = [
-          'video1.mp4',
-          'video2.mp4',
-          'video3.mp4',
-          'video4.mp4'
-          // Füge hier weitere Videonamen hinzu
-        ];
-
-        const randomIndex = Math.floor(Math.random() * videos.length);
-        randomVideo.src = videos[randomIndex];
+        const randomIndex = Math.floor(Math.random() * preloadVideos.length);
+        randomVideo.src = preloadVideos[randomIndex].src;
         randomVideo.style.display = 'block';
         randomVideo.muted = false;
         randomVideo.play();
@@ -102,7 +110,6 @@
         randomVideo.addEventListener('ended', function() {
           randomVideo.style.display = 'none';
           backgroundVideo.style.display = 'block';
-          backgroundVideo.play();
           showButton();
         });
       }
@@ -146,3 +153,5 @@
       });
     });
   </script>
+</body>
+</html>
