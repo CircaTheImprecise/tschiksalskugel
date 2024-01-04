@@ -4,55 +4,80 @@
   <meta charset="UTF-8">
   <title>Zufälliges Video</title>
   <style>
-    #backgroundVideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+    body, html {
       height: 100%;
-      object-fit: cover;
-      z-index: -1;
+      margin: 0;
+      overflow: hidden;
+      background-color: #333; /* Dunkelgrauer Hintergrund */
     }
-    #randomVideo {
-      display: none;
-    }
-    #holdButton {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: red;
+
+    #videoContainer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 1;
+      width: 70%;
+      height: 70%;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #holdButton {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #666; /* Dunkleres Grau für den Knopf */
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       justify-content: center;
       align-items: center;
       color: white;
       font-size: 18px;
       cursor: pointer;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #holdButtonText {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
 <body>
-  <video id="backgroundVideo" loop autoplay>
-    <source src="hintergrundvideo.mp4" type="video/mp4">
-    <!-- Füge hier weitere Quellen für das Hintergrundvideo hinzu (z.B. WebM, Ogg) -->
-  </video>
+  <div id="videoContainer">
+    <video id="backgroundVideo" loop autoplay>
+      <source src="hintergrundvideo.mp4" type="video/mp4">
+      <!-- Füge hier weitere Quellen für das Hintergrundvideo hinzu (z.B. WebM, Ogg) -->
+    </video>
 
-  <video id="randomVideo">
-    <source src="video1.mp4" type="video/mp4">
-    <source src="video1.webm" type="video/webm">
-    <!-- Füge hier weitere Quellen für zufällige Videos hinzu -->
-  </video>
+    <video id="randomVideo">
+      <!-- Hier wird das zufällige Video eingefügt -->
+    </video>
+  </div>
 
-  <div id="holdButton">Halte mich gedrückt!</div>
+  <div id="holdButton">
+    <div id="holdButtonText">Halte mich gedrückt!</div>
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       const randomVideo = document.getElementById('randomVideo');
       const backgroundVideo = document.getElementById('backgroundVideo');
+      const videoContainer = document.getElementById('videoContainer');
       const holdButton = document.getElementById('holdButton');
 
       let holdStart;
@@ -70,30 +95,53 @@
         const randomIndex = Math.floor(Math.random() * videos.length);
         randomVideo.src = videos[randomIndex];
         randomVideo.style.display = 'block';
+        randomVideo.muted = false;
         randomVideo.play();
+        hideButton();
+        randomVideo.addEventListener('ended', function() {
+          randomVideo.style.display = 'none';
+          backgroundVideo.style.display = 'block';
+          backgroundVideo.play();
+          showButton();
+        });
+      }
+
+      // Funktion, um den Button auszublenden
+      function hideButton() {
+        holdButton.style.display = 'none';
+      }
+
+      // Funktion, um den Button wieder anzuzeigen
+      function showButton() {
+        holdButton.style.display = 'block';
       }
 
       // Eventlistener für Klick auf den Halte-Button
       holdButton.addEventListener('mousedown', function(event) {
         holdStart = Date.now();
-        holdButton.innerText = 'Loslassen, um abzuspielen';
+        document.getElementById('holdButtonText').innerText = 'Loslassen, um abzuspielen';
         const holdTimer = setInterval(() => {
           if (Date.now() - holdStart >= holdDuration) {
             clearInterval(holdTimer);
             playRandomVideo();
-            holdButton.innerText = 'Halte mich gedrückt!';
+            document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
           }
         }, 100);
       });
 
       // Eventlistener für Loslassen des Buttons
       holdButton.addEventListener('mouseup', function(event) {
-        holdButton.innerText = 'Halte mich gedrückt!';
+        document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
       });
 
       // Eventlistener für Verlassen des Buttons
       holdButton.addEventListener('mouseleave', function(event) {
-        holdButton.innerText = 'Halte mich gedrückt!';
+        document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
+      });
+
+      // Loop für das Hintergrundvideo vor dem Drücken des Knopfes
+      backgroundVideo.addEventListener('ended', function() {
+        backgroundVideo.play();
       });
     });
   </script>
