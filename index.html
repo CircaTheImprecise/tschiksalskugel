@@ -28,11 +28,7 @@
     document.addEventListener("DOMContentLoaded", function() {
       const randomVideo = document.getElementById('randomVideo');
       const backgroundVideo = document.getElementById('backgroundVideo');
-      const videoContainer = document.getElementById('videoContainer');
       const holdButton = document.getElementById('holdButton');
-
-      let holdStart;
-      let holdDuration = 1000; // Dauer des Gedrückt-Haltens in Millisekunden
 
       const videos = [
         // ... (existing video sources) ...
@@ -73,16 +69,8 @@
 
       // Eventlistener for releasing the hold button (mouseup)
       holdButton.addEventListener('mouseup', function(event) {
-        const holdTime = Date.now() - holdStart;
-        if (holdTime >= holdDuration) {
-          playRandomVideo();
-        } else {
-          document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
-        }
+        playRandomVideo();
       });
-
-      // Remove the mousedown event listener since we're replacing it with mouseup
-      holdButton.removeEventListener('mousedown');
 
       // Eventlistener for leaving the button area
       holdButton.addEventListener('mouseleave', function(event) {
