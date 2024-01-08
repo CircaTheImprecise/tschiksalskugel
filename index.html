@@ -11,13 +11,63 @@
       background-color: #333; /* Dunkelgrauer Hintergrund */
     }
 
-    /* ... (existing CSS styles) ... */
+ #videoContainer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 70%;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    #holdButton {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #666; /* Dunkleres Grau für den Knopf */
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #holdButtonText {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
   </style>
 </head>
 <body>
   <div id="videoContainer">
-    <!-- ... (existing HTML structure) ... -->
+   <video id="backgroundVideo" loop autoplay>
+      <source src="hintergrundvideo.mp4" type="video/mp4">
+      <!-- Füge hier weitere Quellen für das Hintergrundvideo hinzu (z.B. WebM, Ogg) -->
+    </video>
+
+    <video id="randomVideo">
+      <!-- Hier wird das zufällige Video eingefügt -->
+    </video>
   </div>
 
   <div id="holdButton">
@@ -31,7 +81,44 @@
       const holdButton = document.getElementById('holdButton');
 
       const videos = [
-        // ... (existing video sources) ...
+        'video1.mp4',
+        'video2.mp4',
+        'video3.mp4',
+        'video4.mp4', 
+         'video5.mp4',
+         'video6.mp4',
+         'video7.mp4',
+         'video8.mp4',
+         'video9.mp4',
+         'video10.mp4',
+         'video11.mp4',
+         'video12.mp4', 
+        'video13.mp4',
+        'video14.mp4',
+        'video15.mp4',
+        'video16.mp4',
+        'video17.mp4',
+        'video18.mp4',
+        'video19.mp4',
+        'video20.mp4',
+         'video21.mp4',
+         'video22.mp4',
+         'video23.mp4',
+         'video24.mp4',
+         'video25.mp4',
+         'video26.mp4',
+         'video27.mp4',
+         'video28.mp4',
+         'video29.mp4',
+         'video30.mp4', 
+        'video31.mp4',
+        'video32.mp4',
+        'video33.mp4',
+        'video34.mp4',
+        'video35.mp4', 
+         'video36.mp4',
+         'video37.mp4',
+         'video38.mp4'
       ];
 
       // Zufälliges Video vorladen
