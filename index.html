@@ -173,8 +173,15 @@
 
       // Eventlistener für Loslassen des Buttons
       holdButton.addEventListener('mouseup', function(event) {
-        document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
+        const holdTime = Date.now() - holdStart;
+        if (holdTime >= holdDuration) {
+          playRandomVideo();
+        } else {
+          document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
+        }
       });
+
+       holdButton.removeEventListener('mousedown');
 
       // Eventlistener für Verlassen des Buttons
       holdButton.addEventListener('mouseleave', function(event) {
