@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <title>Kugel des Tschiksals</title>
   <style>
-    body, html {
+     body, html {
       height: 100%;
       margin: 0;
       overflow: hidden;
       background-color: #333; /* Dunkelgrauer Hintergrund */
     }
 
- #videoContainer {
+    #videoContainer {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -60,7 +60,7 @@
 </head>
 <body>
   <div id="videoContainer">
-   <video id="backgroundVideo" loop autoplay>
+    <video id="backgroundVideo" loop autoplay>
       <source src="hintergrundvideo.mp4" type="video/mp4">
       <!-- Füge hier weitere Quellen für das Hintergrundvideo hinzu (z.B. WebM, Ogg) -->
     </video>
@@ -154,11 +154,17 @@
         holdButton.style.display = 'block';
       }
 
-        holdButton.addEventListener('mousedown', function(event) {
+      // Eventlistener for pressing down the hold button (mousedown)
+      holdButton.addEventListener('mousedown', function(event) {
         document.getElementById('holdButtonText').innerText = 'Loslassen, um abzuspielen';
       });
 
-     
+      // Eventlistener for releasing the hold button (mouseup)
+      holdButton.addEventListener('mouseup', function(event) {
+        document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
+        playRandomVideo();
+      });
+
       // Eventlistener for leaving the button area
       holdButton.addEventListener('mouseleave', function(event) {
         document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
