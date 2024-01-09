@@ -29,7 +29,7 @@
       left: 0;
     }
 
-    #holdButton {
+     #holdButton {
       width: 100px;
       height: 100px;
       border-radius: 50%;
@@ -46,6 +46,12 @@
       cursor: pointer;
       text-align: center;
       overflow: hidden;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+       #holdButton:active {
+      background-color: #444; /* Dunkleres Grau für den Knopf im Aktivzustand */
+      transform: translate(-50%, -50%) scale(0.95);
     }
 
     #holdButtonText {
@@ -55,10 +61,7 @@
       justify-content: center;
       align-items: center;
     }
-#holdButton:active {
-  transform: scale(0.95);
-  transition: transform 0.2s ease-out;
-}
+
   </style>
 </head>
 <body>
