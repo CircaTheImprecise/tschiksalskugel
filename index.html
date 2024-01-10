@@ -79,7 +79,7 @@
       const randomVideo = document.getElementById('randomVideo');
       const backgroundVideo = document.getElementById('backgroundVideo');
       const holdButton = document.getElementById('holdButton');
-
+      var audio = new Audio('magic');
       const videos = [
         'video1.mp4',
         'video2.mp4',
@@ -156,6 +156,7 @@
 
       // Eventlistener for pressing down the hold button (mousedown)
       holdButton.addEventListener('mousedown', function(event) {
+        audio.play();
         document.getElementById('holdButtonText').innerText = 'Loslassen, um abzuspielen';
       });
 
