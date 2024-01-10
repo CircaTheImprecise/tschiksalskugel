@@ -105,7 +105,7 @@
       const randomVideo = document.getElementById('randomVideo');
       const backgroundVideo = document.getElementById('backgroundVideo');
       const holdButton = document.getElementById('holdButton');
-      
+      const questionText = document.getElementById('questionText');
       const videos = [
         'video1.mp4',
         'video2.mp4',
@@ -154,7 +154,9 @@
         video.preload = 'auto';
         return video;
       });
-
+       function updateQuestion(text) {
+      questionText.innerText = text;
+    }
       // Funktion, um ein zufälliges Video abzuspielen
       function playRandomVideo() {
         const randomIndex = Math.floor(Math.random() * preloadVideos.length);
