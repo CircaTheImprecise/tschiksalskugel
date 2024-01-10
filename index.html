@@ -8,7 +8,7 @@
      body, html {
       height: 100%;
       margin: 0;
-      overflow: visible;
+      overflow: hidden;
       background-color: #333; /* Dunkelgrauer Hintergrund */
     }
 
@@ -69,15 +69,6 @@
     justify-content: center;
     align-items: center;
  }
-   #questionContainer {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: white;
-  font-size: 16px;
-  text-align: right;
-  z-index: 2; /* Set a higher z-index */
-   }
   </style>
 </head>
 <body>
@@ -96,17 +87,13 @@
     <div id="holdButtonText">Halte mich gedrückt!</div>
   </div>
 
-  <div id="questionContainer">
-    <div id="questionText"></div>
-  </div>
-
   <script>
     var audio = new Audio('magic.mp3');
     document.addEventListener("DOMContentLoaded", function() {
       const randomVideo = document.getElementById('randomVideo');
       const backgroundVideo = document.getElementById('backgroundVideo');
       const holdButton = document.getElementById('holdButton');
-      const questionText = document.getElementById('questionText');
+      
       const videos = [
         'video1.mp4',
         'video2.mp4',
@@ -155,9 +142,7 @@
         video.preload = 'auto';
         return video;
       });
-       function updateQuestion(text) {
-      questionText.innerText = text;
-    }
+
       // Funktion, um ein zufälliges Video abzuspielen
       function playRandomVideo() {
         const randomIndex = Math.floor(Math.random() * preloadVideos.length);
@@ -187,26 +172,6 @@
       holdButton.addEventListener('mousedown', function(event) {
         audio.play();
         document.getElementById('holdButtonText').innerText = 'Loslassen, um abzuspielen';
-        // Start Speech Recognition
-        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-        recognition.lang = 'de-DE';
-        recognition.continuous = false;
-        recognition.interimResults = false;
-
-        recognition.onresult = function(event) {
-          const result = event.results[0][0].transcript;
-          updateQuestion(result);
-        };
-
-        recognition.onerror = function(event) {
-          console.error('Speech Recognition Error:', event.error);
-        };
-
-        recognition.onend = function() {
-          recognition.stop();
-        };
-
-        recognition.start();
       });
 
       // Eventlistener for releasing the hold button (mouseup)
@@ -218,8 +183,6 @@
       // Eventlistener for leaving the button area
       holdButton.addEventListener('mouseleave', function(event) {
         document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
-           // Stop Speech Recognition
-        recognition.stop();
       });
 
       // Loop für das Hintergrundvideo vor dem Drücken des Knopfes
