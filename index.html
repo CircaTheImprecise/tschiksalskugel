@@ -8,7 +8,7 @@
      body, html {
       height: 100%;
       margin: 0;
-      overflow: hidden;
+      overflow: visible;
       background-color: #333; /* Dunkelgrauer Hintergrund */
     }
 
@@ -69,14 +69,15 @@
     justify-content: center;
     align-items: center;
  }
-    #questionContainer {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: white;
-      font-size: 16px;
-      text-align: right;
-    }
+   #questionContainer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 16px;
+  text-align: right;
+  z-index: 2; /* Set a higher z-index */
+   }
   </style>
 </head>
 <body>
