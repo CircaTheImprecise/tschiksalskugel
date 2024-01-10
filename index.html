@@ -69,6 +69,14 @@
     justify-content: center;
     align-items: center;
  }
+    #questionContainer {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 16px;
+      text-align: right;
+    }
   </style>
 </head>
 <body>
@@ -85,6 +93,10 @@
 
   <div id="holdButton">
     <div id="holdButtonText">Halte mich gedrückt!</div>
+  </div>
+
+  <div id="questionContainer">
+    <div id="questionText"></div>
   </div>
 
   <script>
@@ -172,6 +184,26 @@
       holdButton.addEventListener('mousedown', function(event) {
         audio.play();
         document.getElementById('holdButtonText').innerText = 'Loslassen, um abzuspielen';
+        // Start Speech Recognition
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = 'de-DE';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = function(event) {
+          const result = event.results[0][0].transcript;
+          updateQuestion(result);
+        };
+
+        recognition.onerror = function(event) {
+          console.error('Speech Recognition Error:', event.error);
+        };
+
+        recognition.onend = function() {
+          recognition.stop();
+        };
+
+        recognition.start();
       });
 
       // Eventlistener for releasing the hold button (mouseup)
@@ -183,6 +215,8 @@
       // Eventlistener for leaving the button area
       holdButton.addEventListener('mouseleave', function(event) {
         document.getElementById('holdButtonText').innerText = 'Halte mich gedrückt!';
+           // Stop Speech Recognition
+        recognition.stop();
       });
 
       // Loop für das Hintergrundvideo vor dem Drücken des Knopfes
