@@ -216,6 +216,16 @@
       // Loop für das Hintergrundvideo vor dem Drücken des Knopfes
       backgroundVideo.addEventListener('ended', function() {
         backgroundVideo.play();
+       });
+
+      // Breathing glow effect for the background video
+      backgroundVideo.addEventListener('play', function() {
+        videoContainer.style.animation = 'breathingGlow 2s infinite alternate';
+      });
+
+      // Pause the breathing glow effect when background video is paused
+      backgroundVideo.addEventListener('pause', function() {
+        videoContainer.style.animation = 'none';
       });
     });
   </script>
