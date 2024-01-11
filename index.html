@@ -167,18 +167,19 @@
       });
 
       // Funktion, um ein zufälliges Video abzuspielen
-      function playRandomVideo() {
-        const randomIndex = Math.floor(Math.random() * preloadVideos.length);
-        randomVideo.src = preloadVideos[randomIndex].src;
-        randomVideo.style.display = 'block';
-        randomVideo.muted = false;
-        randomVideo.play();
-        hideButton();
-        randomVideo.addEventListener('ended', function() {
-          randomVideo.style.display = 'none';
-          backgroundVideo.style.display = 'block';
-          showButton();
-        });
+   function playRandomVideo() {
+  const videoContainer = document.getElementById('videoContainer');
+  const randomIndex = Math.floor(Math.random() * preloadVideos.length);
+  randomVideo.src = preloadVideos[randomIndex].src;
+  randomVideo.style.display = 'block';
+  randomVideo.muted = false;
+  randomVideo.play();
+  hideButton();
+  randomVideo.addEventListener('ended', function() {
+    randomVideo.style.display = 'none';
+    backgroundVideo.style.display = 'block';
+    showButton();
+  });
            // Increase glow effect intensity
         videoContainer.style.boxShadow = '0 0 50px rgba(110, 68, 255, 0.8)';
         setTimeout(() => {
