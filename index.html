@@ -30,6 +30,18 @@
       left: 0;
        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
+      #videoContainer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-shadow: 0 0 30px rgba(110, 68, 255, 0.5); /* Initial glow effect */
+      border-radius: 10px; /* Adjust the border-radius if needed */
+      z-index: -1;
+      transition: box-shadow 0.5s; /* Smooth transition for the glow effect */
+    }
 
     @keyframes breathingGlow {
       0% {
