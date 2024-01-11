@@ -31,19 +31,14 @@
        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 
-     /* Add glow effect to the video container */
-    #videoContainer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      box-shadow: 0 0 30px rgba(110, 68, 255, 0.9); /* Adjust the glow effect */
-      border-radius: 10px; /* Adjust the border-radius if needed */
-      z-index: -1;
+    @keyframes breathingGlow {
+      0% {
+        box-shadow: 0 0 30px rgba(110, 68, 255, 0.5); /* Initial glow effect */
+      }
+      100% {
+        box-shadow: 0 0 50px rgba(110, 68, 255, 0.8); /* Increased glow effect */
+      }
     }
-
 
   #holdButton {
       width: 120px;
