@@ -92,6 +92,17 @@
     justify-content: center;
     align-items: center;
  }
+ /* Sparkling stars effect */
+    .sparkling-star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkling 1s infinite;
+    }
+
   </style>
 </head>
 <body>
@@ -108,6 +119,7 @@
 
   <div id="holdButton">
     <div id="holdButtonText">Halte mich gedrückt!</div>
+    <div id="sparklingStarsContainer"></div>
   </div>
 
   <script>
@@ -116,6 +128,8 @@
       const randomVideo = document.getElementById('randomVideo');
       const backgroundVideo = document.getElementById('backgroundVideo');
       const holdButton = document.getElementById('holdButton');
+      const sparklingStarsContainer = document.getElementById('sparklingStarsContainer');
+
       
       const videos = [
         'video1.mp4',
@@ -200,6 +214,7 @@
       // Eventlistener for pressing down the hold button (mousedown)
       holdButton.addEventListener('mousedown', function(event) {
         audio.play();
+        createSparklingStars();
         document.getElementById('holdButtonText').innerText = 'Loslassen, um abzuspielen';
       });
 
