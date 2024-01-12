@@ -92,18 +92,19 @@
     justify-content: center;
     align-items: center;
  }
- /* Sparkling stars effect */
-    .sparkling-star {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background-color: #fff;
-      border-radius: 50%;
-      opacity: 0;
-      animation: sparkling 1s infinite;
-       z-index: 1;
-    }
-    @keyframes sparkling {
+/* Sparkling stars effect */
+.sparkling-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: sparkling 1s infinite;
+  z-index: 1; /* Ensure the sparkling stars are above other elements */
+}
+
+@keyframes sparkling {
   0% {
     opacity: 0;
     transform: scale(0);
@@ -117,7 +118,6 @@
     transform: scale(0);
   }
 }
-
   </style>
 </head>
 <body>
