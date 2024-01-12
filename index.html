@@ -226,6 +226,15 @@
         holdButton.style.display = 'block';
       }
 
+        // Funktion zum Erstellen der funkelden Sterne
+    function createSparklingStars() {
+      const numStars = 30;
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'sparkling-star';
+        sparklingStarsContainer.appendChild(star);
+      }
+    }
       // Eventlistener for pressing down the hold button (mousedown)
       holdButton.addEventListener('mousedown', function(event) {
         audio.play();
